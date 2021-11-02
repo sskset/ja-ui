@@ -1,0 +1,33 @@
+<p-table [value]="candidates" [loading]="loading" [paginator]="true" [rows]="25" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10,25,50]">
+    <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+            Candidate List
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Skill Tags</th>
+            <th style="width: 10em;"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-c>
+        <tr>
+            <td>{{c.id}}</td>
+            <td>{{c.name}}</td>
+            <td>
+                <p-chip label="{{st}}" *ngFor="let st of c.skillTags"></p-chip>
+            </td>
+            <td>
+                <button pButton label="Search Jobs" [routerLink]="['/matching-jobs', c.id]"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+            In total there are {{candidates ? candidates.length : 0 }} candidates.
+        </div>
+    </ng-template>
+</p-table>
